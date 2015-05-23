@@ -14,21 +14,21 @@ bool DEBUG;
 int  XDIM;
 int NUM_THREADS;
 
-void calculateIndex(matrix_t A, matrix_t B, matrix_t C, int row, int column)
+inline void calculateIndex(matrix_t A, matrix_t B, matrix_t C, int row, int column)
 {
     int i;
     for(i = 0; i < XDIM ;i++)
         C[row][column] += A[row][i]*B[i][column];
 }
 
-void calculateRow(matrix_t A, matrix_t B, matrix_t C, int row)
+inline void calculateRow(matrix_t A, matrix_t B, matrix_t C, int row)
 {
     int column;
     for(column = 0; column < XDIM; column++)
         calculateIndex(A, B, C, row, column);
 }
 
-void productRow(matrix_t A, matrix_t B, matrix_t C)
+inline void productRow(matrix_t A, matrix_t B, matrix_t C)
 {
     int row;
     #pragma omp parallel private(row) num_threads(NUM_THREADS)
@@ -39,7 +39,7 @@ void productRow(matrix_t A, matrix_t B, matrix_t C)
     }
 }
 
-void productIndex(matrix_t A, matrix_t B, matrix_t C)
+inline void productIndex(matrix_t A, matrix_t B, matrix_t C)
 {
     int row;
     int column;
@@ -52,7 +52,7 @@ void productIndex(matrix_t A, matrix_t B, matrix_t C)
     }
 }
 
-void fillMatrix(matrix_t * M, char zeros)
+inline void fillMatrix(matrix_t * M, char zeros)
 {
     *M = new_matrix(XDIM);
     int i,j;
@@ -64,7 +64,7 @@ void fillMatrix(matrix_t * M, char zeros)
     }
 }
 
-void freeMemory(matrix_t M)
+inline void freeMemory(matrix_t M)
 {
    int i = 0;
    for(i = 0; i < XDIM; i++)
@@ -72,7 +72,7 @@ void freeMemory(matrix_t M)
    free(M);
 }
 
-void printMatrix(matrix_t M)
+inline void printMatrix(matrix_t M)
 {
     int row, column;
     for(row = 0; row < XDIM; row++)
