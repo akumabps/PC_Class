@@ -1,9 +1,3 @@
-/*
- *© 2015 WTFPL – Do What the Fuck You Want to Public License.
- *  Cristian Eduardo Sandoval Pineda
- *  Sebastian Eduardo Chaparro Cuevas
- */
-
 #include <stdio.h>
 #include <stdlib.h>
 
